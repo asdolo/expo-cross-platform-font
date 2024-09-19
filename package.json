@@ -1,6 +1,6 @@
 {
   "name": "expo-cross-platform-font",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Use cross platform Fonts easily with this Expo plugin",
   "main": "app.plugin.js",
   "repository": "git@github.com:asdolo/expo-cross-platform-font.git",

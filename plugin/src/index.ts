@@ -72,15 +72,18 @@ const withAndroidXMLFont = (config: ExpoConfig, fonts: WithXMLFontOptions) => {
 
     // 2. Copy fonts to respective Android folders
     for (const { name, folder, variants } of fonts) {
-      // await fs.copy(folder, "android/app/src/main/res/font");
-
       // Instead of just copying the entire folder, we are going to iterate through each file
       for (const { fontFile } of variants) {
-        const formattedFontFile = formatName(fontFile);
+        const fontFileWithoutExtension = path.parse(fontFile).name;
+        const fontFileExtension = path.parse(fontFile).ext;
+        const formattedFontFile = formatName(fontFileWithoutExtension);
 
         await fs.copy(
           path.join(folder, fontFile),
-          path.join("android/app/src/main/res/font", formattedFontFile)
+          path.join(
+            "android/app/src/main/res/font",
+            `${formattedFontFile}${fontFileExtension}`
+          )
         );
       }
 
