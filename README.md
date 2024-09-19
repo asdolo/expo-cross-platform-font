@@ -1,4 +1,4 @@
-# expo-xml-font
+# expo-cross-platform-font
 
 Use Android XML Fonts easily with this Expo plugin.
 
@@ -13,17 +13,17 @@ This plugin builds off an awesome guide available at https://github.com/jsamr/re
 
 ```bash
 # using yarn
-yarn add expo-xml-font
+yarn add expo-cross-platform-font
 
 # using npm
-npm install expo-xml-font
+npm install expo-cross-platform-font
 ```
 
 2. Add the plugin to the `plugins` section of your `app.json` or `app.config.js` file:
 
 ```json
 {
-  "plugins": ["expo-xml-font"]
+  "plugins": ["expo-cross-platform-font"]
 }
 ```
 
@@ -61,13 +61,13 @@ inter_black.ttf (900)
 
 3. Copy these files to a folder where your project is. You could put the font files in an `assets/fonts` folder for example.
 
-4. Configure `expo-xml-font` in your `app.json` or `app.config.js`:
+4. Configure `expo-cross-platform-font` in your `app.json` or `app.config.js`:
 
 ```json
 {
   "plugins": [
     [
-      "expo-xml-font",
+      "expo-cross-platform-font",
       [
         {
           "name": "Inter",
@@ -94,7 +94,7 @@ inter_black.ttf (900)
 
 ## Configuration
 
-When using `expo-xml-font`, you need to pass in an object providing all the details of the font.
+When using `expo-cross-platform-font`, you need to pass in an object providing all the details of the font.
 
 ```ts
 type Options = {

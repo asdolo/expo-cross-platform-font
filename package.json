@@ -1,21 +1,23 @@
 {
-  "name": "expo-xml-font",
-  "version": "3.0.2",
-  "description": "Use Android XML Fonts easily with this Expo plugin",
+  "name": "expo-cross-platform-font",
+  "version": "1.0.0",
+  "description": "Use cross platform Fonts easily with this Expo plugin",
   "main": "app.plugin.js",
-  "repository": "git@github.com:Armster15/expo-xml-font.git",
-  "author": "Armaan A",
+  "repository": "git@github.com:asdolo/expo-cross-platform-font.git",
+  "author": "asdolo",
   "keywords": [
     "android",
+    "ios",
+    "web",
     "font",
     "fonts",
     "react-native",
     "expo"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/Armster15/expo-xml-font#readme",
+  "homepage": "https://github.com/asdolo/expo-cross-platform-font#readme",
   "bugs": {
-    "url": "https://github.com/Armster15/expo-xml-font/issues"
+    "url": "https://github.com/asdolo/expo-cross-platform-font/issues"
   },
   "private": false,
   "publishConfig": {
