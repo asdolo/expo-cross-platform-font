@@ -53,7 +53,9 @@ const withAndroidXMLFont = (config: ExpoConfig, fonts: WithXMLFontOptions) => {
     const addCustomFontLine = fonts
       .map(
         ({ name }) =>
-          `ReactFontManager.getInstance().addCustomFont(this, "${name}", R.font.${formatName(name)})`
+          `ReactFontManager.getInstance().addCustomFont(this, "${name}", R.font.${formatName(
+            name
+          )})`
       )
       .join("\n");
 
@@ -70,10 +72,20 @@ const withAndroidXMLFont = (config: ExpoConfig, fonts: WithXMLFontOptions) => {
 
     // 2. Copy fonts to respective Android folders
     for (const { name, folder, variants } of fonts) {
-      await fs.copy(folder, "android/app/src/main/res/font");
+      // await fs.copy(folder, "android/app/src/main/res/font");
+
+      // Instead of just copying the entire folder, we are going to iterate through each file
+      for (const { fontFile } of variants) {
+        const formattedFontFile = formatName(fontFile);
+
+        await fs.copy(
+          path.join(folder, fontFile),
+          path.join("android/app/src/main/res/font", formattedFontFile)
+        );
+      }
 
       // Validates that none of the files have a "-" or uppercase letters
-      for (const file of await fs.readdir(folder)) {
+      for (const file of await fs.readdir("android/app/src/main/res/font")) {
         if (file.includes("-") || file.toLowerCase() !== file) {
           throw new Error(
             `Font files must not have dashes ("-") and must be all lowercase.`
@@ -87,9 +99,12 @@ const withAndroidXMLFont = (config: ExpoConfig, fonts: WithXMLFontOptions) => {
         `<font-family xmlns:app="http://schemas.android.com/apk/res-auto">\n`;
 
       for (const { fontFile, fontWeight, italic } of variants) {
+        const fontFileWithoutExtension = path.parse(fontFile).name;
+        const formattedFontFile = formatName(fontFileWithoutExtension);
+
         xml += `    <font app:fontStyle="${
           italic ? "italic" : "normal"
-        }" app:fontWeight="${fontWeight}" app:font="@font/${fontFile}" />\n`;
+        }" app:fontWeight="${fontWeight}" app:font="@font/${formattedFontFile}" />\n`;
       }
 
       xml += `</font-family>`;
@@ -108,7 +123,7 @@ const withAndroidXMLFont = (config: ExpoConfig, fonts: WithXMLFontOptions) => {
 // File-based resource names can contain only lowercase a-z, 0-9, or underscore
 // Ex: "Plus Jakarta Sans" -> "plusjakartasans"
 function formatName(name: string) {
-  return name.toLowerCase().replace(/[^a-z0-9_]/g, '')
+  return name.toLowerCase().replace(/[^a-z0-9_]/g, "");
 }
 
 export default withAndroidXMLFont;
